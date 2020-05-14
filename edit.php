@@ -30,16 +30,17 @@
 	$arrayTemplate['footer'] = file_get_contents($arrayFileTemplates['footer']);
 	$arrayTemplate['content'] = file_get_contents($arrayFileTemplates['edit']);
 	$arrayTemplate = array_merge($arrayTemplate, $data);
+	$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['validation']);
 	
-	if (!isset($_COOKIE['user'])) {
-		$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['validation']);
-	}
-	else {
-		$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['user']);
-		$sth = $pdo->prepare('SELECT name FROM validation WHERE id = :id');
+	if (isset($_COOKIE['user']) and isset($_COOKIE['hash'])) {
+		$sth = $pdo->prepare('SELECT name, hash FROM validation WHERE id = :id');
 		$sth->bindValue(':id', $_COOKIE['user']);
 		$sth->execute();
-		$arrayTemplate['user'] = $sth->fetchColumn();
+		
+		if ($_COOKIE['hash'] === ($sth->fetch(FETCH_ASSOC))['hash']) {
+			$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['user']);
+			$arrayTemplate['user'] = ($sth->fetch(FETCH_ASSOC))['name'];
+		}
 	}
 	
 	echo getPage($arrayTemplate, file_get_contents($arrayFileTemplates['main_template']));

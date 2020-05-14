@@ -24,18 +24,19 @@
 	$arrayTemplate['footer']         = file_get_contents($arrayFileTemplates['footer']);
 	$arrayTemplate['content']        = file_get_contents($arrayFileTemplates['forum']);
 	$arrayTemplate['announcement']   = expandArray($data, $arrayFileTemplates['tema']);
+	$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['validation']);
+	$arrayTemplate['form']       = '';
 	
-	if (!isset($_COOKIE['user'])) {
-		$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['validation']);
-		$arrayTemplate['form']       = '';
-	}
-	else {
-		$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['user']);
-		$sth = $pdo->prepare('SELECT name FROM validation WHERE id = :id');
+	if (isset($_COOKIE['user']) and isset($_COOKIE['hash'])) {
+		$sth = $pdo->prepare('SELECT name, hash FROM validation WHERE id = :id');
 		$sth->bindValue(':id', $_COOKIE['user']);
 		$sth->execute();
-		$arrayTemplate['user']       = $sth->fetchColumn();
-		$arrayTemplate['form']       = file_get_contents($arrayFileTemplates['form']);
+		
+		if ($_COOKIE['hash'] === ($sth->fetch(FETCH_ASSOC))['hash']) {
+			$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['user']);
+			$arrayTemplate['user']       = ($sth->fetch(FETCH_ASSOC))['name'];
+			$arrayTemplate['form']       = file_get_contents($arrayFileTemplates['form']);
+		}
 	}
 
 	echo getPage($arrayTemplate, file_get_contents($arrayFileTemplates['main_template']));

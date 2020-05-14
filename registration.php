@@ -6,13 +6,9 @@
 	
 	$arrayTemplate = array();
 	$arrayTemplate['header'] = file_get_contents($arrayFileTemplates['header']);
+	$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['validation']);
 	
-	if (!isset($_COOKIE['user'])) {
-		$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['validation']);
-	}
-	else {
-		$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['user']);
-		
+	if (isset($_COOKIE['user']) and isset($_COOKIE['hash'])) {
 		$host = '127.0.0.1';
 		$db = 'laba_5';
 		$user = 'root';
@@ -25,7 +21,12 @@
 		$sth = $pdo->prepare('SELECT name FROM validation WHERE id = :id');
 		$sth->bindValue(':id', $_COOKIE['user']);
 		$sth->execute();
-		$arrayTemplate['user'] = $sth->fetchColumn();
+		
+		if ($_COOKIE['hash'] === ($sth->fetch(FETCH_ASSOC))['hash']) {
+			$arrayTemplate['validation'] = file_get_contents($arrayFileTemplates['user']);
+			$arrayTemplate['user'] = ($sth->fetch(FETCH_ASSOC))['name'];
+		}
+		
 		$pdo = null;
 	}
 	
