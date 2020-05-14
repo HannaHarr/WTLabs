@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+	background-color:#6C5A92;
+	position:relative;
+}
+
+#container {
+  font-family: "Roboto";
+  margin: 0;
+  font-style: normal;
+  display: grid;
+  width: 80%;
+  padding-left: 10%;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 450px auto 1fr 50px;
+  grid-template-areas:
+    "h h h h h h h h h h h h"
+    "m m m m m m m m m m m m"
+    "c c c c c c c c c c c c"
+    "f f f f f f f f f f f f";
+}
+
+#header {
+  grid-area: h;
+  background: url(../images/header.jpg) no-repeat;
+  background-size: cover;
+  opacity: 0.75;
+  box-shadow: 2px 2px 0px 1px grey;
+  border: medium;
+  height: 100%;
+  text-align: left;
+}
+
+#name {
+	margin-left: 5%;
+	font: 25px Roboto;
+}
+
+#validation {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	opacity: 0.9;
+	width: 20%;
+	margin-left: 80%;
+}
+
+.entry {
+	font-size: 20px;
+	text-decoration: none;
+	color: black;
+	padding: 8px;
+}
+
+.entry:hover {
+  opacity: 0.7;
+}
+
+#nav {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  background-color: #6C5A92;
+  grid-area: m;
+  text-align: center;
+}
+
+.menu {
+  text-decoration: none;
+  display: flex;
+  flex-grow: 1;
+  text-align: center;
+  color: black;
+  font-size: 24px;
+  padding: 8px;
+  background: #f6f6f6;
+}
+
+.menu:hover {
+  background: #6C5A92;
+}
+
+#content {
+  grid-area: c;
+  background: #f6f6f6;
+  height: 100%;
+  padding: 16px;
+  font-size: 16px;
+}
+
+h2 {
+	margin-left: 0.5%;
+}
+
+.facts {
+	margin: 2% 0 0 10%;
+	padding: 2%;
+	width: 70%;
+	display: block;
+}
+
+.facts:hover {
+	box-shadow: 4px 4px 12px 2px grey;
+}
+
+.facts_picture_div {
+  margin-left: 0.5%;
+  height: 80%;
+}
+
+.facts_text_div {
+  margin-left: 0.5%;
+}
+
+.picture {
+  height: 90%;
+  width: 90%;
+}
+
+#footer {
+  grid-area: f;
+  background-color: #222;
+  text-align: center;
+  padding: 8px;
+  color: #f6f6f6;
+}
+
+.announcement {
+  margin: 0 0 1% 0;
+  padding: 1%;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  border: medium;
+  border-radius: 0.5%;
+  width: 98%;
+  box-shadow: 2px 2px 6px 1px grey;
+}
+
+.announcement:hover {
+  box-shadow: 4px 4px 12px 2px grey;
+}
+
+.announcement_picture_div {
+  width: 30%;
+}
+
+.announcement_text_div {
+  width: 70%;
+}
+
+.href {
+  padding: 8px;
+  text-align: left;
+  text-decoration: none;
+  vertical-align: top;
+  font-size: 20px;
+  color: black;
+}
+
+.href:hover {
+  text-decoration: underline;
+}
+
+.tema {
+  box-shadow: 2px 2px 6px 1px grey;
+  width: 90%;
+  padding: 2%;
+  margin: 0 0 2% 2%;
+}
+
+.tema:hover {
+  box-shadow: 4px 4px 12px 2px grey;
+}
+
+.form {
+  width: 94%;
+  margin: 0 0 2% 2%;
+}
+
+.legend {
+	margin: auto;
+}
+
+.label {
+	margin-left: 6%;
+}
+
+input[type="text"], input[type="mail"], #description {
+  font-size: 15px;
+  width: 90%;
+  margin-left: 5.5%;
+}
+
+.button {
+  text-decoration: none;
+  color: black;
+  font-size: 25px;
+  background: #6C5A92;
+  box-shadow: 2px 2px 6px 1px grey;
+  margin-left: 6%;
+  width: 89%;
+  height: auto;
+}
+
+.button:hover {
+  box-shadow: 4px 4px 12px 2px grey;
+}
+
+.photo {
+	display: block;
+	margin: auto;
+	width: 80%;
+	padding: 1%;
+}
+
+.text {
+	font: 10px;
+}
+
+.authorization {
+    text-align: center;
+    font-size: 30px;
+	width: 40%;
+	padding-left:30%;
+}
+
+.crud {
+	padding: 8px;
+	display: flex;
+	justify-content: left;
+	text-align: center;
+}
+
+@media only screen and (max-width: 700px) {
+  #nav {
+    flex-direction: column;
+  }
+
+  .announcement {
+	flex-direction: column;
+  }
+
+  .announcement_text_div {
+	width: 90%;
+	padding-left: 5%;
+  }
+  
+  .announcement_picture_div {
+    padding-left: 5%;
+    width: 100%;
+  }
+
+  #container {
+    grid-template-rows: unset;
+    grid-template-areas:
+      "h h h h h h h h h h h h"
+      "m m m m m m m m m m m m"
+      "c c c c c c c c c c c c"
+      "f f f f f f f f f f f f";
+  }
+
+  #footer {
+	  font-size: 10px;
+  }
+
+  #header {
+    background: #6C5A92;
+	box-shadow: none;
+  }
+}

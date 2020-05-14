@@ -1,0 +1,14 @@
+		<div class="tema">
+		  <a class="href"><h4>{*name*}</h4></a>
+		  <p>{*description*}</p>
+		  <div class="crud">
+		    <form method="post" action="edit.php">
+			  <input type="hidden" name="themes_id" value={*id*}>
+		      <button type="submit">Редактировать</button>		
+		    </form>
+		    <form method="post" action="actions/delete.php">
+		      <input type="hidden" name="themes_id" value={*id*}>
+		      <button type="submit">Удалить</button>
+		    </form>
+		  </div>
+	    </div>

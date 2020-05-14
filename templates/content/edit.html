@@ -1,0 +1,9 @@
+		<h2>Редактирование темы</h2><hr />
+		<form method="post" action="actions/edit.php" class="authorization">
+		  <input type="hidden" name="themes_id" value={*id*}>
+          <label class="label">Название: </label><br>
+		  <input type="text" name="name" value={*name*}>
+		  <label class="label">Описание: </label><br>
+		  <textarea rows="3" name="description" id="description">{*description*}</textarea>
+		  <button type="submit" class="button">Сохранить изменения</button>
+        </form>
